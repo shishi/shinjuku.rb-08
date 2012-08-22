@@ -1,34 +1,54 @@
 require './bowling'
 
 describe Bowling do
-  subject { Bowling.score result }
-  context 'given --' do
-    let(:result) { '--' }
-    it { should eq 0 }
-  end
+  describe "score" do
+    subject { Bowling.score result }
+    context 'given --' do
+      let(:result) { '--' }
+      it { should eq 0 }
+    end
 
-  context 'given 11' do
-    let(:result) { '11' }
-    it { should eq 2 }
-  end
+    context 'given 11' do
+      let(:result) { '11' }
+      it { should eq 2 }
+    end
 
-  context 'given 1-' do
-    let(:result) { '1-' }
-    it { should eq 1 }
-  end
+    context 'given 1-' do
+      let(:result) { '1-' }
+      it { should eq 1 }
+    end
 
-  context 'given 1/' do
-    let(:result) { '1/' }
-    it { should eq 10 }
-  end
+    context 'given 1/' do
+      let(:result) { '1/' }
+      it { should eq 10 }
+    end
 
-  context 'given 1/11' do
-    pending "do it later" do
-      let(:result) { '1/11' }
-      it { should eq 13 }
+    context 'given 1/11' do
+      pending 'do it later' do
+        let(:result) { '1/11' }
+        it { should eq 13 }
+      end
     end
   end
 
+  describe "parse" do
+    subject { Bowling.parse result }
+    context 'given 1-' do
+      let(:result) { '1-' }
+      it { should eq ['1-'] }
+    end
+
+    context 'given 1-11' do
+      let(:result) { '1-11' }
+      it { should eq ['1-', '11'] }
+    end
+
+    context 'given 1-11X' do
+      let(:result) { '1-11X' }
+      it { should eq ['1-', '11', 'X'] }
+    end
+
+  end
 end
 
 describe Bowling::Frame do
